@@ -15,7 +15,7 @@ password1:<input type="password" name="password"/><br>
 </form>
 
 <a href="user/home">
-home
+home11
 </a>
 </body>
 </html>
