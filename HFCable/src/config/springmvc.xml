@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+      http://www.springframework.org/schema/beans/spring-beans-3.0.xsd  
+      http://www.springframework.org/schema/context  
+      http://www.springframework.org/schema/context/spring-context.xsd  
+      http://www.springframework.org/schema/mvc  
+      http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
+	<!-- 注解扫描包 -->
+	<context:component-scan base-package="com.hbhongfei.hfcable" />
+
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/views/"></property>
+		<property name="suffix" value=".jsp"></property>
+	</bean>
+	<!-- 处理静态资源，即不是通过requestMapping对应的 -->
+	<mvc:default-servlet-handler />
+	<!-- 如果没有他，那么requestMapping对应的会出现问题 -->
+	<mvc:annotation-driven />
+
+	<!-- 拦截器 -->
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/company/**" />
+			<mvc:mapping path="/companyImage/**" />
+			<mvc:mapping path="/product/**" />
+			<mvc:mapping path="/productImage/**" />
+			<mvc:mapping path="/type/**" />
+			<mvc:mapping path="/user/**" />
+			<bean class="com.hbhongfei.hfcable.interceptors.LoginInterceptor"></bean>
+		</mvc:interceptor>
+	</mvc:interceptors>
+	
+	<!-- 上传文件 -->
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="defaultEncoding" value="utf-8" />
+		<!-- 最大文件大小，-1为不限制大小 -->
+		<property name="maxUploadSize" value="10485760000" />
+		<!-- 最大内存大小 -->
+		<property name="maxInMemorySize" value="40960" />
+	</bean>
+</beans>  
