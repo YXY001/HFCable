@@ -10,7 +10,7 @@
 <form action="user/add" method="post">
 userName:<input type="text" name="phoneNumber"/><br>
 password:<input type="password" name="password"/><br>
-password:<input type="password" name="password"/><br>
+password1:<input type="password" name="password"/><br>
 <input type="submit" value="提交"/>
 </form>
 
